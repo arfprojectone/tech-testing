@@ -11,22 +11,49 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Setup Node.js environment
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
+      # Cache node_modules to speed up future builds
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
+      # Install dependencies
       - name: Install dependencies
         run: npm ci
 
+      # Cache Cypress binary (optional, if you want to cache the Cypress binary to speed up subsequent runs)
+      - name: Cache Cypress binary
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-cypress-
+
+      # Start the server in background (change to your actual start command)
+      - name: Start server in background
+        run: npm start &
+        env:
+          CI: true
+
+      # Run Cypress tests
       - name: Run Cypress tests
         uses: cypress-io/github-action@v5
         with:
-          start: npm start
-          wait-on: 'http://localhost:3000'
-          wait-on-timeout: 60
+          wait-on: 'http://localhost:3000'  # Replace with the actual URL of your app
+          wait-on-timeout: 60  # Timeout for waiting for the app to be ready
         env:
           CI: true
