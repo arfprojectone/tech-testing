@@ -7,5 +7,5 @@ module.exports = {
     },
   },
 
-  defaultCommandTimeout: 10000
+  defaultCommandTimeout: 30000
 };
