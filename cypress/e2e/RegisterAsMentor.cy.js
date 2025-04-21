@@ -2,7 +2,7 @@ describe('Register as Mentor Feature', () => {
 
     // Data test
     const mentorName = 'Arif Mentor Test'
-    const mentorEmail = 'tes2@test.com'
+    const mentorEmail = 'tes3@test.com'
     const mentorWhatsApp = '62812000000001'
     const mentorCompany = 'PT Testing'
     const pin = 'A123123123'
@@ -25,29 +25,42 @@ describe('Register as Mentor Feature', () => {
 
         cy.wait(2000)
         cy.get('#mentor-onboarding_fullName')
+          .should('exist')
           .should('be.visible')
-          .type(mentorName)
+          .as('inputMentorName')
+        cy.get('@inputMentorName').type(mentorName)
 
         cy.get('#mentor-onboarding_email')
+          .should('exist')
           .should('be.visible')
-          .type(mentorEmail)
+          .as('inputMentorEmail')
+        cy.get('@inputMentorEmail').type(mentorEmail)
 
         cy.get('#mentor-onboarding_whatsapp')
+          .should('exist')
           .should('be.visible')
-          .type(mentorWhatsApp)
-        
+          .as('inputMentorWhatApp')
+        cy.get('@inputMentorWhatApp').type(mentorWhatsApp)
+
         cy.get('#mentor-onboarding_linkedInUrl')
+          .should('exist')
           .should('be.visible')
-          .type('https://www.linkedin.com/in/ariftest/')
+          .as('inputLinkenidMentor')
+        cy.get('@inputLinkenidMentor').type('https://www.linkedin.com/in/ariftest/')
 
         cy.get('#mentor-onboarding_instagramUrl')
+          .should('exist')
           .should('be.visible')
-          .type('https://www.instagram.com/ariftest/')
+          .as('inputInstagramMentor')
+        cy.get('@inputInstagramMentor').type('https://www.instagram.com/ariftest/')
 
         cy.get('#mentor-onboarding_invitationCode')
+          .should('exist')
           .should('be.visible')
-          .type('1230001')
+          .as('inputInvitationCode')
+        cy.get('@inputInvitationCode').type('1230001')
 
+        cy.wait(2000)
         cy.contains('button', 'Selanjutnya')
           .should('be.visible')
           .should('not.be.disabled')

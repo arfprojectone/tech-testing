@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/arfprojectone/tech-testing#readme",
   "devDependencies": {
+    "cypress": "^14.3.1",
     "cypress-xpath": "^2.0.1"
   }
 }
