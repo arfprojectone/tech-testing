@@ -2,7 +2,7 @@ describe('Register as Mentor Feature', () => {
 
     // Data test
     const mentorName = 'Arif Mentor Test'
-    const mentorEmail = 'tes3@test.com'
+    const mentorEmail = 'tes5@test.com'
     const mentorWhatsApp = '62812000000001'
     const mentorCompany = 'PT Testing'
     const pin = 'A123123123'
